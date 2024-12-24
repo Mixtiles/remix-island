@@ -18,16 +18,21 @@ export interface CreateHeadOpts {
 }
 export function createHead(
   Comp: ComponentType,
-  { id = 'remix-island', cleanup = true }: CreateHeadOpts = {},
+  { id = 'remix-island', cleanup = true, cleanupTimeout = 500 }: CreateHeadOpts = {},
 ): HeadComponent {
   const Head: HeadComponent = (props) => {
     const [mounted, setMounted] = useState(globalMounted);
     useEffect(() => {
+      let timeout
       if (cleanup) {
-        removeOldHead(Head);
+        timeout = setTimeout(() => removeOldHead(Head), cleanupTimeout)
       }
       globalMounted = true;
       setMounted(true);
+
+      return () => {
+        clearTimeout(timeout);
+      };
     }, []);
 
     if (!mounted && props.__remix_island_render_server) {
