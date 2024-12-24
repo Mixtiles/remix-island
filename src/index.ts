@@ -15,6 +15,7 @@ let globalMounted = false;
 export interface CreateHeadOpts {
   id?: string;
   cleanup?: boolean;
+  cleanupTimeout?: number;
 }
 export function createHead(
   Comp: ComponentType,
@@ -23,7 +24,7 @@ export function createHead(
   const Head: HeadComponent = (props) => {
     const [mounted, setMounted] = useState(globalMounted);
     useEffect(() => {
-      let timeout
+      let timeout: number | undefined
       if (cleanup) {
         timeout = setTimeout(() => removeOldHead(Head), cleanupTimeout)
       }
@@ -31,7 +32,7 @@ export function createHead(
       setMounted(true);
 
       return () => {
-        clearTimeout(timeout);
+        if (timeout) clearTimeout(timeout);
       };
     }, []);
 
