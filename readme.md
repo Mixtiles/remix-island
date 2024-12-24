@@ -1,3 +1,7 @@
+# Why did mixtiles fork this?
+Moti forked the library and added a timeout on the cleanup of the head.
+More [here](https://github.com/Xiphe/remix-island/issues/2#issuecomment-2561115167)
+
 # remix-island
 
 🚨 this package is a workaround to allow usage of remix with `react@(18.0 - 18.2)` which comes with a lot of hydration problems. I'll probably not maintain this for long after react@18.3 hopefully fixes this.
