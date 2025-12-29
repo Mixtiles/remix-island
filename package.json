@@ -1,5 +1,5 @@
 {
-  "name": "remix-island",
+  "name": "@mixtiles/remix-island",
   "version": "0.2.0",
   "description": "utils to render remix into a dom-node instead of the whole document",
   "main": "dist/index.cjs",
